@@ -30,8 +30,6 @@ The initial version of the platform is based on the following:
 
 ![System design v1](docs/diagrams/system-design-v1.png)
 
-More details can be found in [`docs/architecture-v1.md`](docs/architecture-v1.md).
-
 ## Quickstart
 
 For setup instructions, see:
@@ -41,8 +39,8 @@ For setup instructions, see:
 
 ## Documentation
 
-- [Architecture v1](docs/architecture-v1.md)
+- See [Architecture v1](docs/architecture-v1.md)
 
-## Status
+## Roadmap
 
-Initial project structure and architecture draft.
+- See [Roadmap](docs/roadmap.md)

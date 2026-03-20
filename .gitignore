@@ -26,3 +26,12 @@ replay_pid*
 # env files
 *.env
 .*_env
+
+# IntelliJ IDEA
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
