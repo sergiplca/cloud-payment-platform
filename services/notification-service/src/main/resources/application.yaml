@@ -1,0 +1,12 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: notification-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cloud-payment-platform
+    username: ${POSTGRES_USER:cloud-payment-platform}
+    password: ${POSTGRES_PASSWORD:changeIt}
+    driver-class-name: org.postgresql.Driver

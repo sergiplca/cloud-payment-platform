@@ -1,0 +1,43 @@
+name: cloud-payment-platform
+
+services:
+  order-service:
+    build:
+      context: ../../services/order-service
+    container_name: order-service
+    env_file:
+      - .services_env
+    ports:
+      - "8081:8080"
+    restart: unless-stopped
+    networks:
+      - cloud-payment-platform-network
+
+  payment-service:
+    build:
+      context: ../../services/payment-service
+    container_name: payment-service
+    env_file:
+      - .services_env
+    ports:
+      - "8082:8080"
+    restart: unless-stopped
+    networks:
+      - cloud-payment-platform-network
+
+  notification-service:
+    build:
+      context: ../../services/notification-service
+    container_name: notification-service
+    env_file:
+      - .services_env
+    ports:
+      - "8083:8080"
+    restart: unless-stopped
+    networks:
+      - cloud-payment-platform-network
+
+networks:
+  cloud-payment-platform-network:
+    name: cloud-payment-platform-network
+    driver: bridge

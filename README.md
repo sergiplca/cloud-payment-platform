@@ -32,6 +32,13 @@ The initial version of the platform is based on the following:
 
 More details can be found in [`docs/architecture-v1.md`](docs/architecture-v1.md).
 
+## Quickstart
+
+For setup instructions, see:
+- [Local setup](docs/setup-local.md)
+- [Kubernetes setup] TBD
+- [AWS setup] TBD
+
 ## Documentation
 
 - [Architecture v1](docs/architecture-v1.md)

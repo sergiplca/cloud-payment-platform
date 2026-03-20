@@ -1,0 +1,25 @@
+name: cloud-payment-platform
+
+services:
+  postgres:
+    image: postgres:14
+    container_name: postgresql
+    restart: unless-stopped
+    env_file:
+      - .postgres_env
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - cloud-payment-platform-network
+
+volumes:
+  postgres_data:
+
+networks:
+  cloud-payment-platform-network:
+    name: cloud-payment-platform-network
+    driver: bridge

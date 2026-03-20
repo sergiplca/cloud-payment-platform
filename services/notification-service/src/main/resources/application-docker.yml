@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:${POSTGRES_URL}/cloud-payment-platform
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
