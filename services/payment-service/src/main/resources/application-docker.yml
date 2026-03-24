@@ -3,3 +3,22 @@ spring:
     url: jdbc:${POSTGRES_URL}/cloud-payment-platform
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,metrics"
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enabled: true
+    info:
+      enabled: true
+
+info:
+  app:
+    name: payment-service
+    description: Payment processing platform
+    version: 1.0.0
