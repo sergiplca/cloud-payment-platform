@@ -1,4 +1,4 @@
-package com.sergiplca.payment_service.configuration;
+package com.sergiplca.order_service.configuration;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

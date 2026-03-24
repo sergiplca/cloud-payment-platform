@@ -61,9 +61,10 @@ Once the applications are running, access the interactive API documentation:
 
 ### Payments
 
-| Method   | Endpoint                | Description          |
-|----------|-------------------------|----------------------|
-| `POST`   | `/v1/payments`          | Create a new payment |
+| Method   | Service         | Endpoint       | Description          |
+|----------|-----------------|----------------|----------------------|
+| `POST`   | payment-service | `/v1/payments` | Create a new payment |
+| `POST`   | order-service   | `/v1/orders`   | Create a new order   |
 
 ## Roadmap
 
