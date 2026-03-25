@@ -4,17 +4,44 @@ spring:
       server:
         webmvc:
           routes:
+            #Payment routes
             - id: payments
               uri: http://payment-service:8082
               predicates:
                 - Path=/v1/payments,/v1/payments/**
                 - Method=POST
 
+            #Order routes
             - id: orders
               uri: http://order-service:8081
               predicates:
                 - Path=/v1/orders,/v1/orders/**
                 - Method=POST
+
+            #OpenAPI routes
+            - id: order-openapi
+              uri: http://order-service:8081
+              predicates:
+                - Path=/docs/orders,/docs/orders/**
+              filters:
+                - RewritePath=/docs/orders(?<segment>/?.*), /${segment}
+
+            - id: payment-openapi
+              uri: http://payment-service:8082
+              predicates:
+                - Path=/docs/payments,/docs/payments/**
+              filters:
+                - RewritePath=/docs/payments(?<segment>/?.*), /${segment}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    disable-swagger-default-url: true
+    urls:
+      - name: orders
+        url: /docs/orders/v3/api-docs
+      - name: payments
+        url: /docs/payments/v3/api-docs
 
 logging:
   level:

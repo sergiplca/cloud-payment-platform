@@ -51,13 +51,9 @@ For setup instructions, see:
 
 ## API Documentation
 
-Once the applications are running, access the interactive API documentation:
-
-| Service              | Swagger UI                            | OpenAPI Spec                   |
-|----------------------|---------------------------------------|--------------------------------|
-| order-service        | http://localhost:8080/swagger-ui.html | http://localhost:8080/api-docs |
-| payment-service      | http://localhost:8081/swagger-ui.html | http://localhost:8081/api-docs |
-| notification-service | http://localhost:8082/swagger-ui.html | http://localhost:8082/api-docs |
+Once the applications are running, access the interactive API documentation exposed for all services through the gateway:
+- **Swagger UI:** http://localhost:8080/swagger-ui.html
+- **OpenAPI Spec:** http://localhost:8080/v3/api-docs
 
 ### Payments
 

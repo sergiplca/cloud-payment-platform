@@ -89,7 +89,7 @@ A working backend service that performs a real operation and persists data.
 ---
 
 ### Phase 3 — Service boundaries and synchronous communication
-**Status:** In Progress
+**Status:** Done
 
 **Goal:** introduce a clearer role for `order-service`
 
@@ -105,7 +105,7 @@ A better understanding of service ownership and synchronous inter-service commun
 ---
 
 ### Phase 4 — API Gateway routing
-**Status:** Planned
+**Status:** In Progress
 
 **Goal:** Hide business-logic services behind an API Gateway
 
@@ -117,7 +117,7 @@ Planned work:
 - Implement security
 
 **Expected outcome:**
-Application is accessible through the Gateway instead of directly to each service.
+Application is accessible through the Gateway instead of directly to each service and authentication is required.
 
 ---
 
