@@ -13,7 +13,8 @@ The goal is not to build everything at once, but to grow the system in controlle
 The project currently includes:
 
 - PostgreSQL running locally through Docker Compose
-- three Spring Boot services:
+- four Spring Boot services:
+    - `api-gateway`
     - `payment-service`
     - `order-service`
     - `notification-service`
@@ -26,8 +27,9 @@ At this stage:
 
 - the service skeletons are in place
 - infrastructure for local development exists
-- business logic has not been implemented yet
-- services are intentionally minimal
+- simple business logic in payment-service and order-service
+- api-gateway routes requests to appropriate services
+- business logic services hidden behind the gateway
 
 ---
 
@@ -70,7 +72,7 @@ A reproducible local development baseline with clear documentation.
 ---
 
 ### Phase 2 — First business flow
-**Status:** Planned
+**Status:** Done
 
 **Goal:** implement the first real capability in `payment-service`
 
@@ -87,7 +89,7 @@ A working backend service that performs a real operation and persists data.
 ---
 
 ### Phase 3 — Service boundaries and synchronous communication
-**Status:** Planned
+**Status:** In Progress
 
 **Goal:** introduce a clearer role for `order-service`
 
@@ -102,7 +104,24 @@ A better understanding of service ownership and synchronous inter-service commun
 
 ---
 
-### Phase 4 — Event-driven communication
+### Phase 4 — API Gateway routing
+**Status:** Planned
+
+**Goal:** Hide business-logic services behind an API Gateway
+
+Planned work:
+- create api-gateway service
+- add routes to the rest of services
+- hide the services so they are not accessible directly
+- document API changes
+- Implement security
+
+**Expected outcome:**
+Application is accessible through the Gateway instead of directly to each service.
+
+---
+
+### Phase 5 — Event-driven communication
 **Status:** Planned
 
 **Goal:** move from purely synchronous communication to asynchronous workflows
@@ -118,7 +137,7 @@ First end-to-end asynchronous flow between services.
 
 ---
 
-### Phase 5 — Kubernetes deployment
+### Phase 6 — Kubernetes deployment
 **Status:** Planned
 
 **Goal:** deploy services in Kubernetes without moving every dependency there immediately
@@ -135,7 +154,7 @@ Basic understanding of service deployment and orchestration in Kubernetes.
 
 ---
 
-### Phase 6 — Observability
+### Phase 7 — Observability
 **Status:** Planned
 
 **Goal:** observe system behavior once services do something meaningful
@@ -152,7 +171,7 @@ Ability to inspect how the system behaves under normal and failing conditions.
 
 ---
 
-### Phase 7 — Resilience
+### Phase 8 — Resilience
 **Status:** Planned
 
 **Goal:** design for failure instead of assuming perfect communication
@@ -169,7 +188,7 @@ A more production-oriented backend architecture.
 
 ---
 
-### Phase 8 — Infrastructure as Code and cloud proof of concept
+### Phase 9 — Infrastructure as Code and cloud proof of concept
 **Status:** Planned
 
 **Goal:** provision and deploy a reduced but meaningful part of the system in AWS

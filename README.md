@@ -1,7 +1,7 @@
 # Cloud Payment Platform
 
 [![Java](https://img.shields.io/badge/Java-17-blue.svg)](https://openjdk.org/projects/jdk/17/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0.3-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0.4-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
@@ -45,7 +45,7 @@ The initial version of the platform is based on the following:
 ## Quickstart
 
 For setup instructions, see:
-- [Local setup](docs/setup-local.md)
+- [Local (Docker) setup](docs/setup-local.md)
 - [Kubernetes setup] Planned
 - [AWS setup] Planned
 

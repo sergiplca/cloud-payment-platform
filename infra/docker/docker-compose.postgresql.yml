@@ -14,12 +14,12 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - cloud-payment-platform-network
+      - cloud-payment-platform-backend
 
 volumes:
   postgres_data:
 
 networks:
-  cloud-payment-platform-network:
-    name: cloud-payment-platform-network
+  cloud-payment-platform-backend:
     driver: bridge
+    internal: true
