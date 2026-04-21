@@ -4,6 +4,16 @@ server:
 spring:
   application:
     name: api-gateway
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          secret-key: super-secret-which-no-one-should-ever-know
+
+app:
+  token:
+    expiration: 60000
+    secret: super-secret-which-no-one-should-ever-know
 
 management:
   endpoints:

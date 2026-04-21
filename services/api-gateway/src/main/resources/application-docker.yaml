@@ -32,6 +32,16 @@ spring:
                 - Path=/docs/payments,/docs/payments/**
               filters:
                 - RewritePath=/docs/payments(?<segment>/?.*), /${segment}
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          secret-key: ${TOKEN_SECRET}
+
+app:
+  token:
+    expiration: 120000
+    secret: ${TOKEN_SECRET}
 
 springdoc:
   swagger-ui:
@@ -46,3 +56,4 @@ springdoc:
 logging:
   level:
     org.springframework.cloud.gateway: TRACE
+    org.springframework.security: DEBUG
