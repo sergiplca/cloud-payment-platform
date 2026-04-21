@@ -28,6 +28,14 @@ spring:
     validate-on-migrate: true
     default_schema: paymentservice
 
+feign:
+  order:
+    url: http://localhost:8081
+  client:
+    connectTimeout: 5000
+    readTimeout: 5000
+    loggerLevel: full
+
 logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} %-5level [%X{correlationId}] %logger{36} - %msg%n"

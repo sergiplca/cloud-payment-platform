@@ -15,10 +15,19 @@ public class OrderController implements OrderControllerSwaggerSpec {
 
     private final OrderService orderService;
 
+    @Override
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public OrderResponseDto createOrder(@Valid @RequestBody OrderRequestDto requestDto) {
 
         return orderService.createOrder(requestDto);
+    }
+
+    @Override
+    @GetMapping("/{orderId}")
+    @ResponseStatus(HttpStatus.OK)
+    public OrderResponseDto getOrder(@PathVariable Long orderId) {
+
+        return orderService.getOrder(orderId);
     }
 }

@@ -23,4 +23,8 @@ public class PaymentRequestDto {
     @NotBlank(message = "customerReference must be present and not be blank")
     @Schema(example = "pa_1234", description = "Payment customer reference")
     private String customerReference;
+
+    @NotNull(message = "orderId must be present")
+    @Schema(example = "1234", description = "Order the payment refers to")
+    private Long orderId;
 }

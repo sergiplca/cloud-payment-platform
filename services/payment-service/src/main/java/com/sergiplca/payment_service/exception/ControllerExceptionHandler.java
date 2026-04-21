@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestControllerAdvice
-public class ValidationExceptionHandler {
+public class ControllerExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ProblemDetail handleValidation(MethodArgumentNotValidException ex) {
@@ -31,6 +31,16 @@ public class ValidationExceptionHandler {
         problem.setTitle("Validation failed");
         problem.setDetail("One or more fields are invalid");
         problem.setProperty("errors", errors);
+
+        return problem;
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ProblemDetail handleNotFound(NotFoundException ex) {
+
+        ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
+        problem.setTitle("Not Found");
+        problem.setDetail(ex.getMessage());
 
         return problem;
     }

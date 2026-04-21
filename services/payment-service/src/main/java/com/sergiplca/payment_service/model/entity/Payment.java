@@ -27,6 +27,8 @@ public class Payment {
     @Enumerated(EnumType.STRING)
     private PaymentStatus status;
 
+    private Long orderId;
+
     @CreationTimestamp
     private LocalDateTime creationTimestamp;
 }

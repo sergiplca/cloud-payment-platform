@@ -16,7 +16,7 @@ spring:
               uri: http://order-service:8081
               predicates:
                 - Path=/v1/orders,/v1/orders/**
-                - Method=POST
+                - Method=POST,GET
 
             #OpenAPI routes
             - id: order-openapi

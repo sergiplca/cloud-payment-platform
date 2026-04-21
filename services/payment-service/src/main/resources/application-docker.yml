@@ -4,6 +4,10 @@ spring:
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
 
+feign:
+  order:
+    url: http://order-service:8081/v1/orders
+
 management:
   endpoints:
     web:

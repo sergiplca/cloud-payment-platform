@@ -1,5 +1,7 @@
 package com.sergiplca.payment_service.service;
 
+import com.sergiplca.payment_service.client.OrderClient;
+import com.sergiplca.payment_service.exception.NotFoundException;
 import com.sergiplca.payment_service.model.dto.PaymentRequestDto;
 import com.sergiplca.payment_service.model.dto.PaymentResponseDto;
 import com.sergiplca.payment_service.model.enums.PaymentStatus;
@@ -7,6 +9,7 @@ import com.sergiplca.payment_service.repository.PaymentRepository;
 import com.sergiplca.payment_service.service.mapper.PaymentMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,11 +20,18 @@ public class PaymentService {
 
     private final PaymentRepository paymentRepository;
     private final PaymentMapper paymentMapper;
+    private final OrderClient orderClient;
 
     @Transactional
     public PaymentResponseDto createPayment(PaymentRequestDto requestDto) {
 
         log.info("Creating payment");
+
+        var order = orderClient.getOrder(requestDto.getOrderId());
+
+        if (HttpStatusCode.valueOf(404).equals(order.getStatusCode())) {
+            throw new NotFoundException("Order with id " + requestDto.getOrderId() + " was not found");
+        }
 
         var payment = paymentMapper.toEntity(requestDto);
         payment.setStatus(PaymentStatus.CREATED);

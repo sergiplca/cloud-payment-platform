@@ -28,4 +28,22 @@ public interface OrderControllerSwaggerSpec {
         )
     })
     OrderResponseDto createOrder(OrderRequestDto requestDto);
+
+    @Operation(
+        summary = "Find an order by id",
+        description = "Given an order id, the details about the order are returned"
+    )
+    @ApiResponses({
+        @ApiResponse(
+            responseCode = "200",
+            description = "Order retrieved successfully",
+            content = @Content(mediaType = "application/json")
+        ),
+        @ApiResponse(
+            responseCode = "404",
+            description = "Order with given id not found",
+            content = @Content
+        )
+    })
+    OrderResponseDto getOrder(Long orderId);
 }

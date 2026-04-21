@@ -57,10 +57,11 @@ Once the applications are running, access the interactive API documentation expo
 
 ### Payments
 
-| Method   | Service         | Endpoint       | Description          |
-|----------|-----------------|----------------|----------------------|
-| `POST`   | payment-service | `/v1/payments` | Create a new payment |
-| `POST`   | order-service   | `/v1/orders`   | Create a new order   |
+| Method | Service         | Endpoint          | Description           |
+|--------|-----------------|-------------------|-----------------------|
+| `POST` | payment-service | `/v1/payments`    | Create a new payment  |
+| `POST` | order-service   | `/v1/orders`      | Create a new order    |
+| `GET`  | order-service   | `/v1/orders/{id}` | Get an existing order |
 
 ## Roadmap
 
