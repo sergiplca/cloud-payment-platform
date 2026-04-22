@@ -9,6 +9,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
+@Schema(description = "DTO to place an order")
 public class OrderRequestDto {
 
     @NotNull(message = "amount must be present")

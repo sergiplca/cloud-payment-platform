@@ -59,6 +59,7 @@ Once the applications are running, access the interactive API documentation expo
 
 | Method | Service         | Endpoint          | Description           |
 |--------|-----------------|-------------------|-----------------------|
+| `POST` | api-gateway     | `/auth/token`     |                       |
 | `POST` | payment-service | `/v1/payments`    | Create a new payment  |
 | `POST` | order-service   | `/v1/orders`      | Create a new order    |
 | `GET`  | order-service   | `/v1/orders/{id}` | Get an existing order |

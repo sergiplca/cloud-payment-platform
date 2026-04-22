@@ -29,6 +29,7 @@ At this stage:
 - infrastructure for local development exists
 - simple business logic in payment-service and order-service
 - api-gateway routes requests to appropriate services
+- api-gateway serves a fake token and endpoints require it to work
 - business logic services hidden behind the gateway
 
 ---
@@ -117,7 +118,7 @@ Planned work:
 - Implement security
 
 **Expected outcome:**
-Application is accessible through the Gateway instead of directly to each service and authentication is required.
+Application is accessible through the Gateway instead of directly to each service and authorization is required.
 
 ---
 

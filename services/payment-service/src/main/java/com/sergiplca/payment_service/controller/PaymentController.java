@@ -1,6 +1,5 @@
 package com.sergiplca.payment_service.controller;
 
-import com.sergiplca.payment_service.controller.swagger.PaymentControllerSwaggerSpec;
 import com.sergiplca.payment_service.model.dto.PaymentRequestDto;
 import com.sergiplca.payment_service.model.dto.PaymentResponseDto;
 import com.sergiplca.payment_service.service.PaymentService;

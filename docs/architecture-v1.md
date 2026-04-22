@@ -29,7 +29,7 @@ The purpose is not to replicate a real payment processor in full detail, but to 
 The first version of the project will include the following components:
 
 ### API Gateway
-Responsible for receiving external requests and routing them to internal services.
+Responsible for receiving external requests and routing them to internal services, as well as managing authorization.
 
 ### Order Service
 Responsible for creating and managing payment orders.
@@ -80,6 +80,7 @@ This flow will evolve as the project grows.
 
 The project is also intended to explore non-functional requirements such as:
 
+- security
 - scalability
 - reliability
 - observability

@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth/token")
 @RequiredArgsConstructor
-public class TokenController {
+public class TokenController implements TokenControllerSwaggerSpec {
 
     private final TokenService tokenService;
 
+    @Override
     @PostMapping
     public TokenResponseDto createToken(@RequestBody TokenRequestDto tokenRequestDto) {
 

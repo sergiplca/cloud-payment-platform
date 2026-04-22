@@ -48,6 +48,8 @@ springdoc:
     path: /swagger-ui.html
     disable-swagger-default-url: true
     urls:
+      - name: gateway
+        url: /v3/api-docs
       - name: orders
         url: /docs/orders/v3/api-docs
       - name: payments
