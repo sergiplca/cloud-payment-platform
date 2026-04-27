@@ -16,5 +16,5 @@ public interface OrderMapper {
     Order toEntity(OrderRequestDto request);
 
     @Mapping(target = "orderId", source = "id")
-    OrderResponseDto toResponse(Order payment);
+    OrderResponseDto toResponse(Order order);
 }
