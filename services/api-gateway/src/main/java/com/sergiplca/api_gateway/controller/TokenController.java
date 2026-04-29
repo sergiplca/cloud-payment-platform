@@ -3,6 +3,7 @@ package com.sergiplca.api_gateway.controller;
 import com.sergiplca.api_gateway.model.dto.TokenRequestDto;
 import com.sergiplca.api_gateway.model.dto.TokenResponseDto;
 import com.sergiplca.api_gateway.service.TokenService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +19,7 @@ public class TokenController implements TokenControllerSwaggerSpec {
 
     @Override
     @PostMapping
-    public TokenResponseDto createToken(@RequestBody TokenRequestDto tokenRequestDto) {
+    public TokenResponseDto createToken(@Valid @RequestBody TokenRequestDto tokenRequestDto) {
 
         return tokenService.createToken(tokenRequestDto);
     }

@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: api-gateway
+
+app:
+  token:
+    expiration: 60000
+    secret: super-secret-which-no-one-should-ever-know
