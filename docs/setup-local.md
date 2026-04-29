@@ -29,5 +29,8 @@ For local deployment purposes each components will be deployed in a separate con
 ### 1) Run PostgreSQL container
 `docker compose -f infra/docker/docker-compose.postgresql.yml up -d`
 
-### 2) Run cloud-payment-platform web services
+### 2) Run Kafka and Kafka UI containers
+`docker compose -f infra/docker/docker-compose.kafka.yml up -d`
+
+### 3) Run cloud-payment-platform web services
 `docker compose -f infra/docker/docker-compose.local.yml up -d`

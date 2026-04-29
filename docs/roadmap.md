@@ -106,7 +106,7 @@ A better understanding of service ownership and synchronous inter-service commun
 ---
 
 ### Phase 4 — API Gateway routing
-**Status:** In Progress
+**Status:** Done
 
 **Goal:** Hide business-logic services behind an API Gateway
 
@@ -123,7 +123,7 @@ Application is accessible through the Gateway instead of directly to each servic
 ---
 
 ### Phase 5 — Event-driven communication
-**Status:** Planned
+**Status:** In Progress
 
 **Goal:** move from purely synchronous communication to asynchronous workflows
 
