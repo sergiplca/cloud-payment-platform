@@ -2,6 +2,7 @@ package com.sergiplca.payment_service.fixtures;
 
 import com.sergiplca.payment_service.model.dto.PaymentRequestDto;
 import com.sergiplca.payment_service.model.dto.PaymentResponseDto;
+import com.sergiplca.payment_service.model.dto.event.PaymentEventDto;
 import com.sergiplca.payment_service.model.entity.Payment;
 import com.sergiplca.payment_service.model.enums.PaymentStatus;
 
@@ -48,5 +49,18 @@ public class PaymentFixtures {
         responseDto.setStatus(PaymentStatus.CREATED);
 
         return responseDto;
+    }
+
+    public static PaymentEventDto getPaymentEventDto(Long paymentId) {
+
+        var eventDto = new PaymentEventDto();
+        eventDto.setPaymentId(paymentId);
+        eventDto.setAmount(BigDecimal.TEN);
+        eventDto.setCurrency("EUR");
+        eventDto.setCustomerReference("abc");
+        eventDto.setStatus(PaymentStatus.CREATED);
+        eventDto.setOrderId(1L);
+
+        return eventDto;
     }
 }

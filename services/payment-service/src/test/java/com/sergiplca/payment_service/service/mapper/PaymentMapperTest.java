@@ -2,6 +2,7 @@ package com.sergiplca.payment_service.service.mapper;
 
 import com.sergiplca.payment_service.model.dto.PaymentRequestDto;
 import com.sergiplca.payment_service.model.dto.PaymentResponseDto;
+import com.sergiplca.payment_service.model.dto.event.PaymentEventDto;
 import com.sergiplca.payment_service.model.entity.Payment;
 import com.sergiplca.payment_service.model.enums.PaymentStatus;
 import org.junit.jupiter.api.Test;
@@ -39,12 +40,28 @@ class PaymentMapperTest {
     @Test
     void givenPaymentWhenMapToPaymentResponseDtoThenAllFieldsAreCorrect() {
 
-        Payment order = getPayment(1L);
+        Payment entity = getPayment(1L);
 
-        PaymentResponseDto responseDto = paymentMapper.toResponse(order);
+        PaymentResponseDto responseDto = paymentMapper.toResponse(entity);
 
         assertNotNull(responseDto);
         assertEquals(1L, responseDto.getPaymentId());
         assertEquals(PaymentStatus.CREATED, responseDto.getStatus());
+    }
+
+    @Test
+    void givenPaymentWhenMapToPaymentEventDtoThenAllFieldsAreCorrect() {
+
+        Payment entity = getPayment(1L);
+
+        PaymentEventDto eventDto = paymentMapper.toEventDto(entity);
+
+        assertNotNull(eventDto);
+        assertEquals(1L, eventDto.getPaymentId());
+        assertEquals(PaymentStatus.CREATED, eventDto.getStatus());
+        assertEquals(BigDecimal.TEN, eventDto.getAmount());
+        assertEquals("EUR", eventDto.getCurrency());
+        assertEquals("abc", eventDto.getCustomerReference());
+        assertEquals(1L, eventDto.getOrderId());
     }
 }

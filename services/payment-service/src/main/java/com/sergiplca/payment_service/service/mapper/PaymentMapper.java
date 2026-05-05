@@ -3,6 +3,7 @@ package com.sergiplca.payment_service.service.mapper;
 import com.sergiplca.payment_service.configuration.MapStructConfig;
 import com.sergiplca.payment_service.model.dto.PaymentRequestDto;
 import com.sergiplca.payment_service.model.dto.PaymentResponseDto;
+import com.sergiplca.payment_service.model.dto.event.PaymentEventDto;
 import com.sergiplca.payment_service.model.entity.Payment;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -17,4 +18,7 @@ public interface PaymentMapper {
 
     @Mapping(target = "paymentId", source = "id")
     PaymentResponseDto toResponse(Payment payment);
+
+    @Mapping(target = "paymentId", source = "id")
+    PaymentEventDto toEventDto(Payment payment);
 }

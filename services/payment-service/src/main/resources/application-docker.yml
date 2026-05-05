@@ -4,6 +4,9 @@ spring:
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
 
+  kafka:
+    bootstrap-servers: kafka:9092
+
 feign:
   order:
     url: http://order-service:8081/v1/orders
