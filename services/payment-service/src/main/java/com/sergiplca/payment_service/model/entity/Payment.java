@@ -3,10 +3,9 @@ package com.sergiplca.payment_service.model.entity;
 import com.sergiplca.payment_service.model.enums.PaymentStatus;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Entity
 @Data
@@ -29,6 +28,5 @@ public class Payment {
 
     private Long orderId;
 
-    @CreationTimestamp
-    private LocalDateTime creationTimestamp;
+    private Instant creationTimestamp;
 }

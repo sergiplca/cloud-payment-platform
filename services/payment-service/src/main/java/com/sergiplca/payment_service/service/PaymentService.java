@@ -49,7 +49,7 @@ public class PaymentService {
         var savedPayment = paymentRepository.save(payment);
 
         kafkaProducerService.sendMessage(
-            paymentTopic, eventMapper.createEvent(PAYMENT, paymentMapper.toEventDto(payment)));
+            paymentTopic, eventMapper.createEvent(PAYMENT, paymentMapper.toEventDto(savedPayment)));
 
         log.info("Payment with id {} created", savedPayment.getId());
 

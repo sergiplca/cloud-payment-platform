@@ -1,6 +1,6 @@
-package com.sergiplca.payment_service.model.dto.event;
+package com.sergiplca.notification_service.model.dto.event;
 
-import com.sergiplca.payment_service.model.enums.PaymentStatus;
+import com.sergiplca.notification_service.model.enums.PaymentStatus;
 import lombok.Data;
 
 import java.math.BigDecimal;

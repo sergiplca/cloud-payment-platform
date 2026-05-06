@@ -1,9 +1,6 @@
 spring:
   application:
-    name: payment-service
-
-  kafka:
-    bootstrap-servers: kafka:9092
+    name: notification-service
 
   jpa:
     hibernate:
@@ -11,7 +8,7 @@ spring:
     show-sql: false
     properties:
       hibernate:
-        default_schema: paymentservice
+        default_schema: notificationservice
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
@@ -20,4 +17,10 @@ spring:
       locations: classpath:db/migration
       baseline-on-migrate: true
       validate-on-migrate: true
-      default_schema: paymentservice
+      default_schema: notificationservice
+
+  kafka:
+    bootstrap-servers: kafka:9092
+    consumer:
+      group-id: notification-service
+      auto-offset-reset: earliest

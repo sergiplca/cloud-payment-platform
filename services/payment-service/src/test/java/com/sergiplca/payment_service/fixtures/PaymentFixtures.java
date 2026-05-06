@@ -7,7 +7,7 @@ import com.sergiplca.payment_service.model.entity.Payment;
 import com.sergiplca.payment_service.model.enums.PaymentStatus;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 public class PaymentFixtures {
 
@@ -19,7 +19,7 @@ public class PaymentFixtures {
         payment.setCurrency("EUR");
         payment.setCustomerReference("abc");
         payment.setStatus(PaymentStatus.CREATED);
-        payment.setCreationTimestamp(LocalDateTime.of(2026, 1, 1, 0, 0, 0));
+        payment.setCreationTimestamp(Instant.now());
         payment.setOrderId(1L);
 
         return payment;

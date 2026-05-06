@@ -34,7 +34,7 @@ class PaymentMapperTest {
         assertEquals(1L, entity.getOrderId());
         assertNull(entity.getId());
         assertNull(entity.getStatus());
-        assertNull(entity.getCreationTimestamp());
+        assertNotNull(entity.getCreationTimestamp());
     }
 
     @Test

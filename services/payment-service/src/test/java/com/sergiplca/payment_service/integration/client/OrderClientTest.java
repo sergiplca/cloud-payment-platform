@@ -1,13 +1,15 @@
-package com.sergiplca.payment_service.client;
+package com.sergiplca.payment_service.integration.client;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
+import com.sergiplca.payment_service.client.OrderClient;
+import com.sergiplca.payment_service.integration.configuration.AbstractIntegrationTest;
+import com.sergiplca.payment_service.integration.configuration.IntegrationTest;
 import com.sergiplca.payment_service.model.dto.OrderResponseDto;
 import com.sergiplca.payment_service.model.enums.OrderStatus;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -15,8 +17,8 @@ import org.springframework.test.context.DynamicPropertySource;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-class OrderClientTest {
+@IntegrationTest
+class OrderClientTest extends AbstractIntegrationTest {
 
     private static WireMockServer wireMockServer;
 

@@ -2,7 +2,7 @@ package com.sergiplca.payment_service.integration.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sergiplca.payment_service.client.OrderClient;
-import com.sergiplca.payment_service.integration.configuration.AbstractPostgresTest;
+import com.sergiplca.payment_service.integration.configuration.AbstractIntegrationTest;
 import com.sergiplca.payment_service.integration.configuration.IntegrationTest;
 import com.sergiplca.payment_service.service.PaymentService;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 @AutoConfigureMockMvc
 @Sql(scripts = "/fixtures/sql/delete.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-class PaymentControllerTest extends AbstractPostgresTest {
+class PaymentControllerTest extends AbstractIntegrationTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
