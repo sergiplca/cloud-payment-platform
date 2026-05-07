@@ -83,6 +83,6 @@ Binary serialization formats such as Avro (common in the Confluent/Kafka ecosyst
 
 ## References
 
-- [Event catalog — payment.created](../events.md)
+- [Event catalog — payments.payment.created](../events.md)
 - [ADR 002 — Transactional Outbox Pattern](002-outbox-pattern.md)
 - [ADR 003 — Idempotency keys on the payment endpoint](003-idempotency-keys.md)

@@ -10,7 +10,7 @@ The goal is not to build everything at once, but to grow the system in controlle
 
 ## Current status
 
-**Active phase:** Phase 5 — Event-driven communication
+**Active phase:** Phase 6 — Event robustness and idempotency
 
 The platform currently includes:
 
@@ -72,23 +72,16 @@ Route all external traffic through the gateway, hide internal services from dire
 ---
 
 ### Phase 5 — Event-driven communication
-**Status:** In Progress
+**Status:** Done
 
-**Goal:** move from purely synchronous communication to an asynchronous workflow
-
-Planned work:
-- publish `payment.created` event from `payment-service` after a valid payment persists
-- consume the event in `notification-service` and persist a `Notification` record
-- define and document the event schema and versioning strategy in `docs/events.md`
-- write ADR 001: Kafka over direct REST
-
-**Expected outcome:**
-First end-to-end asynchronous flow between services, with a documented event contract.
+Payments to be published to `payments.payment.created` topic in Kafka and `notification-service` to consume and persist them.  
+Define and document the event schema in [Events](events.md).  
+Document [ADR-001 - Kafka over REST](adr/001-kafka-over-rest.md).
 
 ---
 
 ### Phase 6 — Event robustness and idempotency
-**Status:** Planned
+**Status:** In Progress
 
 **Goal:** make the event layer production-realistic and introduce fintech-standard reliability patterns
 

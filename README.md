@@ -17,10 +17,10 @@ The platform is composed of five Spring Boot services communicating synchronousl
 ```
 Client
   └── API Gateway (auth, routing)
-        ├── Order Service       (order lifecycle)
-        ├── Payment Service     (payment processing, idempotency, Outbox)
+        ├── Order Service        (order lifecycle)
+        ├── Payment Service      (payment processing, idempotency, Outbox)
         ├── Notification Service (async event consumer)
-        └── Payment Assistant   (RAG-powered conversational interface)
+        └── Payment Assistant    (RAG-powered conversational interface)
 ```
 
 - **PostgreSQL** — primary relational store for all services, with `pgvector` extension for semantic embeddings in the Payment Assistant
@@ -81,6 +81,13 @@ Once the applications are running, the full interactive API documentation is ava
 
 ---
 
+## Async communications
+
+The diagram in [Architecture](docs/architecture.md) describes how services interact with Kafka event bus to produce and consume data.  
+All events with its structure, producer and consumers are described in [Events](docs/events.md).
+
+---
+
 ## Architecture Decision Records
 
 Every significant architectural decision in this project is documented in [docs/adr/](docs/adr/). ADRs record what was decided, why, what alternatives were considered, and what the trade-offs are.
@@ -98,4 +105,4 @@ Every significant architectural decision in this project is documented in [docs/
 
 ## Roadmap
 
-See [docs/roadmap.md](docs/roadmap.md) for the full development roadmap and current status.
+See [Roadmap](docs/roadmap.md) for the full development roadmap and current status.

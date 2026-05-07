@@ -59,7 +59,7 @@ Processes payment operations. Responsible for:
 
 - creating and persisting payments
 - validating that the referenced order exists (synchronous call to Order Service)
-- publishing `payment.created` events via the Transactional Outbox Pattern
+- publishing `payments.payment.created` events via the Transactional Outbox Pattern
 - enforcing idempotency on `POST /v1/payments` via Redis-cached idempotency keys
 
 The Outbox Pattern ensures that events are never lost even if the Kafka publish fails after a successful DB commit. See [ADR 002](adr/002-outbox-pattern.md).
@@ -68,7 +68,7 @@ The Outbox Pattern ensures that events are never lost even if the Kafka publish 
 
 An asynchronous event consumer. Responsible for:
 
-- consuming `payment.created` events from Kafka
+- consuming `payments.payment.created` events from Kafka
 - persisting a `Notification` record per event
 - guaranteeing at-most-once notification creation via event ID deduplication
 
@@ -95,7 +95,7 @@ Primary relational store for all services. Also hosts the `pgvector` extension f
 
 Event bus for asynchronous communication. Current topics:
 
-- `payment.created` — published by Payment Service, consumed by Notification Service and Payment Assistant Service
+- `payments.payment.created` — published by Payment Service, consumed by Notification Service and Payment Assistant Service
 
 ### Redis
 
@@ -112,14 +112,14 @@ Used by Payment Assistant Service for:
 
 ## 5. Communication patterns
 
-| Interaction | Pattern | Notes |
-|---|---|---|
-| Client → services | REST via gateway | All external traffic through API Gateway |
-| Payment Service → Order Service | Synchronous REST | Validate order existence before creating payment |
-| Payment Service → Kafka | Async / Outbox | Event written to DB first, then published |
+| Interaction | Pattern            | Notes |
+|---|--------------------|---|
+| Client → services | REST via gateway   | All external traffic through API Gateway |
+| Payment Service → Order Service | Synchronous REST   | Validate order existence before creating payment |
+| Payment Service → Kafka | Async / Outbox     | Event written to DB first, then published |
 | Kafka → Notification Service | Async event-driven | Idempotent consumer |
 | Kafka → Payment Assistant | Async event-driven | Indexing pipeline |
-| Payment Assistant → Anthropic | Sync REST | Embeddings + completions |
+| Payment Assistant → Anthropic | Synchronous REST    | Embeddings + completions |
 
 ---
 

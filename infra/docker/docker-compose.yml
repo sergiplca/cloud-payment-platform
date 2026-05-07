@@ -1,0 +1,6 @@
+name: cloud-payment-platform
+
+include:
+  - ./docker-compose.postgresql.yml
+  - ./docker-compose.kafka.yml
+  - ./docker-compose.local.yml
