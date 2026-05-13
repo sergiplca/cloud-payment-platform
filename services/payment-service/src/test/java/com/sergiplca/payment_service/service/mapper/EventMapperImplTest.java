@@ -11,9 +11,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class EventMapperTest {
+class EventMapperImplTest {
 
-    private final EventMapper<String> eventMapper = new EventMapper<>();
+    private final EventMapperImpl eventMapperImpl = new EventMapperImpl();
 
     @Test
     void givenPayloadWhenCreateEventThenEventIsCorrectlyCreated() {
@@ -22,12 +22,12 @@ class EventMapperTest {
         EventType eventType = EventType.PAYMENT;
         LocalDateTime beforeCall = LocalDateTime.now();
 
-        EventDto<String> result = eventMapper.createEvent(eventType, payload);
+        EventDto<String> result = eventMapperImpl.createEvent(eventType.getValue(), payload);
 
         LocalDateTime afterCall = LocalDateTime.now();
 
         assertNotNull(result);
-        assertEquals(eventType, result.getEventType());
+        assertEquals(eventType.getValue(), result.getEventType());
         assertEquals(payload, result.getPayload());
         assertNotNull(result.getEventId());
         UUID.fromString(result.getEventId());

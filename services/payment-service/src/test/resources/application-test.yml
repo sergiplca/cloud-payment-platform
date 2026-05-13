@@ -21,3 +21,9 @@ spring:
       baseline-on-migrate: true
       validate-on-migrate: true
       default_schema: paymentservice
+
+app:
+  outbox:
+    fixed-delay: 2000
+    page-size: 512
+    default-sort-column: creationTimestamp

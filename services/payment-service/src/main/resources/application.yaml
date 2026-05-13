@@ -40,6 +40,11 @@ app:
   kafka:
     payment-topic: payments.payment.completed
 
+  outbox:
+    fixed-delay: 2000
+    page-size: 512
+    default-sort-column: creationTimestamp
+
 logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} %-5level [%X{correlationId}] %logger{36} - %msg%n"

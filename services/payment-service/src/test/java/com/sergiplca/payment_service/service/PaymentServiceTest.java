@@ -1,5 +1,7 @@
 package com.sergiplca.payment_service.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sergiplca.payment_service.client.OrderClient;
 import com.sergiplca.payment_service.exception.NotFoundException;
 import com.sergiplca.payment_service.model.dto.event.EventDto;
@@ -7,12 +9,12 @@ import com.sergiplca.payment_service.model.dto.event.PaymentEventDto;
 import com.sergiplca.payment_service.model.entity.Payment;
 import com.sergiplca.payment_service.model.enums.PaymentStatus;
 import com.sergiplca.payment_service.repository.PaymentRepository;
-import com.sergiplca.payment_service.service.mapper.EventMapper;
 import com.sergiplca.payment_service.service.mapper.PaymentMapper;
+import com.sergiplca.payment_service.service.outbox.OutboxService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +27,7 @@ import static com.sergiplca.payment_service.model.enums.EventType.PAYMENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class PaymentServiceTest {
@@ -41,16 +42,20 @@ class PaymentServiceTest {
     private OrderClient orderClient;
 
     @Mock
-    private EventMapper<PaymentEventDto> eventMapper;
+    private OutboxService outboxService;
 
-    @Mock
-    private KafkaProducerService<PaymentEventDto> kafkaProducerService;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @InjectMocks
     private PaymentService paymentService;
 
+    @BeforeEach
+    void setUp() {
+
+        paymentService = new PaymentService(paymentRepository, paymentMapper, orderClient, outboxService, objectMapper);
+    }
+
     @Test
-    void givenPaymentRequestDtoWhenCreatePaymentThenPaymentIsCreated() {
+    void givenPaymentRequestDtoWhenCreatePaymentThenPaymentIsCreated() throws JsonProcessingException {
 
         var paymentRequestDto = getPaymentRequestDto();
         var paymentEventDto = getPaymentEventDto(1L);
@@ -61,7 +66,7 @@ class PaymentServiceTest {
         when(paymentRepository.save(any())).thenReturn(getPayment(1L));
         when(orderClient.getOrder(1L)).thenReturn(ResponseEntity.ok(getOrderResponseDto(1L)));
         when(paymentMapper.toEventDto(any(Payment.class))).thenReturn(paymentEventDto);
-        when(eventMapper.createEvent(PAYMENT, paymentEventDto)).thenReturn(eventDto);
+        doNothing().when(outboxService).saveOutboxEvent(any(), any(), any());
 
         paymentService.createPayment(paymentRequestDto);
 
@@ -71,7 +76,8 @@ class PaymentServiceTest {
         assertEquals("EUR", orderCaptor.getValue().getCurrency());
         assertEquals("abc", orderCaptor.getValue().getCustomerReference());
         assertEquals(PaymentStatus.CREATED, orderCaptor.getValue().getStatus());
-        verify(kafkaProducerService).sendMessage(null, eventDto);
+        verify(outboxService).saveOutboxEvent(
+            objectMapper.writeValueAsString(paymentEventDto), PAYMENT.getValue(), null);
     }
 
     @Test

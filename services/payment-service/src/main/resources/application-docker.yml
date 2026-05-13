@@ -24,6 +24,12 @@ management:
     info:
       enabled: true
 
+app:
+  outbox:
+    fixed-delay: 2000
+    page-size: 512
+    default-sort-column: creationTimestamp
+
 info:
   app:
     name: payment-service
