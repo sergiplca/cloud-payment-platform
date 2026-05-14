@@ -1,6 +1,5 @@
 # ADR 001 — Asynchronous communication via Kafka over direct REST calls for payment events
 
-**Status:** Accepted  
 **Date:** 2026-05-06
 
 ---
