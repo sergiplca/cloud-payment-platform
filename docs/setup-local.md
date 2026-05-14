@@ -38,7 +38,9 @@ This starts:
 |----------------------|------|----------------------|
 | PostgreSQL           | 5432 | Primary database     |
 | Kafka                | 9092 | Event broker         |
-| Kafka-UI             | 9080 | Kafka Management UI  |
+| Kafka UI             | 9080 | Kafka Management UI  |
+| Redis                | 6379 | Memory Cache         |
+| Redis UI             | 5540 | Redis Management UI  |
 | api-gateway          | 8080 | External entry point |
 | order-service        | 8081 | Order management     |
 | payment-service      | 8082 | Payment processing   |
@@ -171,7 +173,7 @@ This will print all events published to `payments.payment.created` since the top
 docker compose down
 ```
 
-To also remove volumes (database data, Kafka offsets):
+To also remove volumes (database data, Kafka offsets, Redis keys):
 
 ```bash
 docker compose down -v

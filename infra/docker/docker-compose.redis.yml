@@ -1,0 +1,47 @@
+name: cloud-payment-platform
+
+services:
+  redis:
+    image: redis:7.4-alpine
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: >
+      redis-server
+      --maxmemory 512mb
+      --maxmemory-policy allkeys-lru
+      --appendonly yes
+      --appendfsync everysec
+      --save 60 1000
+      --loglevel notice
+    volumes:
+      - redis_data:/data
+    networks:
+      - cloud-payment-platform-backend
+
+  redis-ui:
+    image: redislabs/redisinsight:latest
+    container_name: redis-ui
+    restart: unless-stopped
+    ports:
+      - "5540:5540"
+    volumes:
+      - redisinsight_data:/data
+    networks:
+      - cloud-payment-platform-edge
+      - cloud-payment-platform-backend
+    depends_on:
+      - redis
+
+volumes:
+  redis_data:
+  redisinsight_data:
+
+networks:
+  cloud-payment-platform-edge:
+    driver: bridge
+
+  cloud-payment-platform-backend:
+    driver: bridge
+    internal: true
