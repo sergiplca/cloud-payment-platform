@@ -1,0 +1,3 @@
+alter table notificationservice.payment_notification
+add constraint unique_payment_id
+unique using index payment_notification_payment_id;

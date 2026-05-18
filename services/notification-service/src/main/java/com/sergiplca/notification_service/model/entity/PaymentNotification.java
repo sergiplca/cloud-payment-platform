@@ -21,6 +21,7 @@ public class PaymentNotification {
     )
     private Long id;
 
+    @Column(unique = true)
     private Long paymentId;
 
     private BigDecimal amount;

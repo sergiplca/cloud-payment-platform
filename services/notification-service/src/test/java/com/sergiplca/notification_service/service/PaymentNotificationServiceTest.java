@@ -7,13 +7,17 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.system.CapturedOutput;
+import org.springframework.boot.test.system.OutputCaptureExtension;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import static com.sergiplca.notification_service.fixtures.PaymentNotificationFixtures.getPaymentEventDto;
 import static com.sergiplca.notification_service.fixtures.PaymentNotificationFixtures.getPaymentNotification;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
+@ExtendWith({MockitoExtension.class, OutputCaptureExtension.class})
 class PaymentNotificationServiceTest {
 
     @Mock
@@ -35,6 +39,22 @@ class PaymentNotificationServiceTest {
 
         paymentNotificationService.processPayment(eventDto);
 
-        verify(paymentNotificationRepository).save(paymentNotification);
+        verify(paymentNotificationRepository).saveAndFlush(paymentNotification);
+    }
+
+    @Test
+    void givenAlreadyExistingNotificationForPaymentWhenProcessThenPaymentIsIgnored(CapturedOutput output) {
+
+        var eventDto = getPaymentEventDto(1L);
+        var paymentNotification = getPaymentNotification(1L);
+
+        when(paymentNotificationMapper.toEntity(eventDto)).thenReturn(paymentNotification);
+        when(paymentNotificationRepository.saveAndFlush(paymentNotification))
+            .thenThrow(new DataIntegrityViolationException("ex"));
+
+        paymentNotificationService.processPayment(eventDto);
+
+        assertThat(output).contains("Payment with id 1 already persisted, ignoring payload");
+        assertThat(output).doesNotContain("Successfully persisted payment");
     }
 }
