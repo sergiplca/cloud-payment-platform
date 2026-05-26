@@ -26,8 +26,11 @@ Create `.services_env` file under `infra/docker/` with the following content:
   - `POSTGRES_URL=postgresql://postgresql:5432`
   - `POSTGRES_USER=<your_desired_user>`
   - `POSTGRES_PASSWORD=<your_desired_password>`
+  - `REDIS_HOST=redis`
+  - `REDIS_PORT=6379`
   - `TOKEN_SECRET=<your_desired_secret>`
 
+Run:
 ```bash
 docker compose up -d
 ```
@@ -112,6 +115,7 @@ Copy the `id` from the response. You will need it in the next step.
 curl -s -X POST http://localhost:8080/v1/payments \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <token>" \
+  -H "Idempotency-Key: <key>" \
   -d '{
         "amount": "0.1",
         "currency": "EUR",
