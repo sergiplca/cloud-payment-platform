@@ -115,7 +115,7 @@ Copy the `id` from the response. You will need it in the next step.
 curl -s -X POST http://localhost:8080/v1/payments \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <token>" \
-  -H "Idempotency-Key: <key>" \
+  -H "Idempotency-Key: <UUID-v4 key>" \
   -d '{
         "amount": "0.1",
         "currency": "EUR",
