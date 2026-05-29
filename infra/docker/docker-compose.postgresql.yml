@@ -2,7 +2,7 @@ name: cloud-payment-platform
 
 services:
   postgres:
-    image: postgres:14
+    image: pgvector/pgvector:pg14
     container_name: postgresql
     restart: unless-stopped
     env_file:

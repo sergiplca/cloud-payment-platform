@@ -1,0 +1,62 @@
+name: cloud-payment-platform
+
+services:
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_NUM_PARALLEL=2
+      - OLLAMA_MAX_LOADED_MODELS=1
+      - OLLAMA_KEEP_ALIVE=5m
+    healthcheck:
+      test: [ "CMD-SHELL", "ollama list || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    networks:
+      - cloud-payment-platform-backend
+      - cloud-payment-platform-edge
+
+  ollama-init:
+    image: ollama/ollama:latest
+    container_name: ollama-init
+    restart: "no"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    entrypoint: >
+      /bin/bash -c "
+        echo 'Waiting for Ollama TCP port...' &&
+        until bash -c 'echo > /dev/tcp/ollama/11434' 2>/dev/null; do
+          echo 'Not ready, retrying...' && sleep 2;
+        done &&
+        echo 'Pulling llama3.2:3b...' &&
+        ollama pull llama3.2:3b &&
+        echo 'Model ready.'
+      "
+    depends_on:
+      ollama:
+        condition: service_healthy
+    networks:
+      - cloud-payment-platform-backend
+      - cloud-payment-platform-edge
+
+volumes:
+  ollama_data:
+    driver: local
+
+networks:
+  cloud-payment-platform-edge:
+    driver: bridge
+
+  cloud-payment-platform-backend:
+    driver: bridge
+    internal: true

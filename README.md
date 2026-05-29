@@ -26,6 +26,7 @@ Client
 - **PostgreSQL** — primary relational store for all services, with `pgvector` extension for semantic embeddings in the Payment Assistant
 - **Kafka** — event bus for async communication between Payment Service, Notification Service, and Payment Assistant
 - **Redis** — idempotency key store for the Payment Service
+- **Ollama** — LLM to be used by Payment Assistant
 
 See [Architecture](docs/architecture.md) for the full design and [docs/adr/](docs/adr/) for the decisions behind it.
 
@@ -33,22 +34,22 @@ See [Architecture](docs/architecture.md) for the full design and [docs/adr/](doc
 
 ## Stack
 
-| Category        | Technology                          |
-|-----------------|-------------------------------------|
-| Language        | Java 17 (LTS)                       |
-| Framework       | Spring Boot 4.0.4                   |
-| Database        | PostgreSQL 14 + pgvector extension  |
-| ORM             | Spring Data JPA / Hibernate         |
-| Build           | Gradle                              |
-| API docs        | springdoc-openapi                   |
-| Message broker  | Kafka                               |
-| Caching         | Redis                               |
-| AI              | Anthropic Claude API                |
-| Observability   | Prometheus / Grafana / Zipkin       |
-| Testing         | JUnit 5 / Testcontainers            |
-| CI/CD           | GitHub Actions                      |
-| Container       | Docker / Kubernetes                 |
-| IaC             | Terraform (AWS PoC)                 |
+| Category        | Technology                         |
+|-----------------|------------------------------------|
+| Language        | Java 17 (LTS)                      |
+| Framework       | Spring Boot 4.0.4                  |
+| Database        | PostgreSQL 14 + pgvector extension |
+| ORM             | Spring Data JPA / Hibernate        |
+| Build           | Gradle                             |
+| API docs        | springdoc-openapi                  |
+| Message broker  | Kafka                              |
+| Caching         | Redis                              |
+| AI              | Ollama API                         |
+| Observability   | Prometheus / Grafana / Zipkin      |
+| Testing         | JUnit 5 / Testcontainers           |
+| CI/CD           | GitHub Actions                     |
+| Container       | Docker / Kubernetes                |
+| IaC             | Terraform (AWS PoC)                |
 
 ---
 

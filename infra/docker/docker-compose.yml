@@ -4,4 +4,5 @@ include:
   - ./docker-compose.postgresql.yml
   - ./docker-compose.kafka.yml
   - ./docker-compose.redis.yml
+  - ./docker-compose.ollama.yml
   - ./docker-compose.local.yml

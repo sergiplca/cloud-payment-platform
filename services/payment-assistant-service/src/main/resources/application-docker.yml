@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    url: jdbc:${POSTGRES_URL}/cloud-payment-platform
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+
+  kafka:
+    bootstrap-servers: kafka:9092
+
+  ai:
+    ollama:
+      base-url: http://ollama:11434
+      chat:
+        model: llama3.2:1b
+      embedding:
+        model: nomic-embed-text
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,metrics"
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enabled: true
+    info:
+      enabled: true
+
+info:
+  app:
+    name: payment-assistant-service
+    description: RAG powered interface for payments
+    version: 1.0.0

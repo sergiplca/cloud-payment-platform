@@ -18,7 +18,7 @@ The platform currently includes:
 - full business logic in `order-service` and `payment-service`
 - API Gateway routing with token-based auth
 - PostgreSQL running via Docker Compose, connected to all services
-- Kafka and Zookeeper running locally via Docker Compose
+- Kafka, Zookeeper, Redis and Ollama LLM running locally via Docker Compose
 - initial architecture documentation and system design diagram
 - initial ADR structure under `docs/adr/`
 
@@ -81,7 +81,7 @@ Document [ADR-001 - Kafka over REST](adr/001-kafka-over-rest.md).
 ---
 
 ### Phase 6 — Event robustness and idempotency
-**Status:** In Progress
+**Status:** Done
 
 **Goal:** make the event layer production-realistic and introduce fintech-standard reliability patterns
 
@@ -98,15 +98,15 @@ A payment flow that is safe to retry, resilient to duplicate events, and honest 
 ---
 
 ### Phase 7 — Payment Assistant (AI / RAG)
-**Status:** Planned
+**Status:** In progress
 
 **Goal:** add a conversational AI feature that models what a real fintech would build for its clients
 
 Planned work:
 - create `payment-assistant-service` as a new Spring Boot service registered in the gateway
 - enable the `pgvector` extension on the existing PostgreSQL instance
-- build an indexing pipeline: consume `payment.created` events from Kafka, embed the payment record via the Anthropic embeddings API, and store the vector in pgvector
-- build a query endpoint `POST /v1/assistant/query` that embeds the user question, runs a cosine similarity search, retrieves the top relevant records, and passes them to the Claude API as RAG context
+- build an indexing pipeline: consume `payments.payment.created` events from Kafka, embed the payment record via the Ollama embeddings API, and store the vector in pgvector
+- build a query endpoint `POST /v1/assistant/query` that embeds the user question, runs a cosine similarity search, retrieves the top relevant records, and passes them to the Ollama API as RAG context
 - constrain the system prompt so the model only answers from retrieved records and never invents transactions
 - write ADR 004: RAG architecture, why not fine-tuning, hallucination risk, production considerations (PII, audit logging, rate limiting)
 

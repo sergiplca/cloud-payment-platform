@@ -45,6 +45,16 @@ services:
     networks:
       - cloud-payment-platform-backend
 
+  payment-assistant-service:
+    build:
+      context: ../../services/payment-assistant-service
+    container_name: payment-assistant-service
+    env_file:
+      - .services_env
+    restart: unless-stopped
+    networks:
+      - cloud-payment-platform-backend
+
 networks:
   cloud-payment-platform-edge:
     driver: bridge

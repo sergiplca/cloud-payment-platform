@@ -37,17 +37,19 @@ docker compose up -d
 
 This starts:
 
-| Container            | Port | Purpose              |
-|----------------------|------|----------------------|
-| PostgreSQL           | 5432 | Primary database     |
-| Kafka                | 9092 | Event broker         |
-| Kafka UI             | 9080 | Kafka Management UI  |
-| Redis                | 6379 | Memory Cache         |
-| Redis UI             | 5540 | Redis Management UI  |
-| api-gateway          | 8080 | External entry point |
-| order-service        | 8081 | Order management     |
-| payment-service      | 8082 | Payment processing   |
-| notification-service | 8083 | Async event consumer |
+| Container                 | Port  | Purpose                       |
+|---------------------------|-------|-------------------------------|
+| PostgreSQL                | 5432  | Primary database              |
+| Kafka                     | 9092  | Event broker                  |
+| Kafka UI                  | 9080  | Kafka Management UI           |
+| Redis                     | 6379  | Memory Cache                  |
+| Redis UI                  | 5540  | Redis Management UI           |
+| Ollama LLM                | 11434 | LLM                           |
+| api-gateway               | 8080  | External entry point          |
+| order-service             | 8081  | Order management              |
+| payment-service           | 8082  | Payment processing            |
+| notification-service      | 8083  | Async event consumer          |
+| payment-assistant-service | 8084  | RAG powered payment assistant |
 
 Verify all containers are running:
 

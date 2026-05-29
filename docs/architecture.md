@@ -78,7 +78,7 @@ A RAG-powered conversational interface. Responsible for:
 
 - indexing payment and order records as vector embeddings in PostgreSQL (`pgvector`)
 - accepting natural language queries via `POST /v1/assistant/query`
-- retrieving the most semantically relevant records and passing them as context to the Claude API
+- retrieving the most semantically relevant records and passing them as context to the Ollama API
 - returning a grounded natural language response
 
 The model is constrained via system prompt to only answer from retrieved records and never invent transactions. See [ADR 004](adr/004-rag-payment-assistant.md).
@@ -101,7 +101,7 @@ Event bus for asynchronous communication. Current topics:
 
 Used by Payment Service for idempotency key storage with TTL-based expiry.
 
-### API (Anthropic)
+### LLM (Ollama)
 
 Used by Payment Assistant Service for:
 
@@ -112,14 +112,14 @@ Used by Payment Assistant Service for:
 
 ## 5. Communication patterns
 
-| Interaction | Pattern            | Notes |
-|---|--------------------|---|
-| Client → services | REST via gateway   | All external traffic through API Gateway |
+| Interaction                     | Pattern            | Notes |
+|---------------------------------|--------------------|---|
+| Client → services               | REST via gateway   | All external traffic through API Gateway |
 | Payment Service → Order Service | Synchronous REST   | Validate order existence before creating payment |
-| Payment Service → Kafka | Async / Outbox     | Event written to DB first, then published |
-| Kafka → Notification Service | Async event-driven | Idempotent consumer |
-| Kafka → Payment Assistant | Async event-driven | Indexing pipeline |
-| Payment Assistant → Anthropic | Synchronous REST    | Embeddings + completions |
+| Payment Service → Kafka         | Async / Outbox     | Event written to DB first, then published |
+| Kafka → Notification Service    | Async event-driven | Idempotent consumer |
+| Kafka → Payment Assistant       | Async event-driven | Indexing pipeline |
+| Payment Assistant → Ollama      | Synchronous REST    | Embeddings + completions |
 
 ---
 
@@ -147,10 +147,10 @@ Client
   → POST /v1/assistant/query { "question": "..." }
   → API Gateway
   → Payment Assistant Service
-      → Embed question via Anthropic embeddings API
+      → Embed question via Ollama embeddings API
       → Cosine similarity search in pgvector → top-k records
       → Build prompt: system constraints + retrieved records + question
-      → Claude API → streamed response
+      → Ollama API → streamed response
   → Client
 ```
 
