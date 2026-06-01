@@ -18,6 +18,13 @@ spring:
                 - Path=/v1/orders,/v1/orders/**
                 - Method=POST,GET
 
+            #Payment assistant routes
+            - id: payment-assistant
+              uri: http://payment-assistant-service:8084
+              predicates:
+                - Path=/v1/assistant/query,/v1/assistant/query/**
+                - Method=POST
+
             #OpenAPI routes
             - id: order-openapi
               uri: http://order-service:8081

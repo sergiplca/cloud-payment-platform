@@ -11,9 +11,14 @@ spring:
     password: ${POSTGRES_PASSWORD:changeIt}
     driver-class-name: org.postgresql.Driver
 
+  kafka:
+    consumer:
+      group-id: payment-assistant-service
+      auto-offset-reset: earliest
+
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
     show-sql: false
     properties:
       hibernate:
@@ -27,6 +32,18 @@ spring:
     baseline-on-migrate: true
     validate-on-migrate: true
     default_schema: paymentassistantservice
+
+feign:
+  llm:
+    url: http://localhost:11434
+  client:
+    connectTimeout: 5000
+    readTimeout: 5000
+    loggerLevel: full
+
+app:
+  kafka:
+    payment-topic: payments.payment.completed
 
 logging:
   pattern:

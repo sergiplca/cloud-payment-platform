@@ -28,6 +28,10 @@ management:
     info:
       enabled: true
 
+feign:
+  llm:
+    url: http://ollama:11434
+
 info:
   app:
     name: payment-assistant-service

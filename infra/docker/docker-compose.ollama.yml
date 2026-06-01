@@ -40,6 +40,8 @@ services:
         done &&
         echo 'Pulling llama3.2:3b...' &&
         ollama pull llama3.2:3b &&
+        echo 'Pulling nomic-embed-text...' &&
+        ollama pull nomic-embed-text &&
         echo 'Model ready.'
       "
     depends_on:
