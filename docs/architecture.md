@@ -158,14 +158,14 @@ Client
 
 ## 7. Non-functional concerns
 
-| Concern | Approach |
-|---|---|
-| Reliability | Transactional Outbox Pattern, idempotency keys, consumer deduplication |
-| Resilience | Timeouts, retries with backoff, circuit breaker (Resilience4j), LLM fallback |
-| Observability | Prometheus + Grafana (metrics), Zipkin (distributed traces), structured logs |
-| Security | Token-based auth at the gateway; internal services not directly accessible |
-| Testability | Testcontainers for integration tests against real PostgreSQL and Kafka |
-| AI grounding | System prompt constraints, retrieval-only answers, no invented data |
+| Concern | Approach                                                                               |
+|---|----------------------------------------------------------------------------------------|
+| Reliability | Transactional Outbox Pattern, idempotency keys, consumer deduplication                 |
+| Resilience | Timeouts, retries with backoff, circuit breaker (Resilience4j), LLM fallback           |
+| Observability | Prometheus + Grafana (metrics), Zipkin (distributed traces), structured logs           |
+| Security | Token-based auth at the gateway; internal services not directly accessible             |
+| Testability | Testcontainers for integration tests against real PostgreSQL and Kafka                 |
+| AI grounding | System prompt constraints, retrieval-only answers, no invented data, security concerns |
 
 ---
 

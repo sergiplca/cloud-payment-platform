@@ -14,8 +14,9 @@ The goal is not to build everything at once, but to grow the system in controlle
 
 The platform currently includes:
 
-- five Spring Boot services: `api-gateway`, `order-service`, `payment-service`, `notification-service`
+- five Spring Boot services: `api-gateway`, `order-service`, `payment-service`, `notification-service`, `payment-assistant-service`
 - full business logic in `order-service` and `payment-service`
+- Initial first working version of the RAG powered payment assistant
 - API Gateway routing with token-based auth
 - PostgreSQL running via Docker Compose, connected to all services
 - Kafka, Zookeeper, Redis and Ollama LLM running locally via Docker Compose
@@ -108,6 +109,7 @@ Planned work:
 - build an indexing pipeline: consume `payments.payment.created` events from Kafka, embed the payment record via the Ollama embeddings API, and store the vector in pgvector
 - build a query endpoint `POST /v1/assistant/query` that embeds the user question, runs a cosine similarity search, retrieves the top relevant records, and passes them to the Ollama API as RAG context
 - constrain the system prompt so the model only answers from retrieved records and never invents transactions
+- dive deep into AI security concerns
 - write ADR 004: RAG architecture, why not fine-tuning, hallucination risk, production considerations (PII, audit logging, rate limiting)
 
 **Expected outcome:**

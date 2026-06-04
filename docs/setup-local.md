@@ -44,7 +44,7 @@ This starts:
 | Kafka UI                  | 9080  | Kafka Management UI           |
 | Redis                     | 6379  | Memory Cache                  |
 | Redis UI                  | 5540  | Redis Management UI           |
-| Ollama LLM                | 11434 | LLM                           |
+| Ollama LLM                | 11434 | Ollama LLM                    |
 | api-gateway               | 8080  | External entry point          |
 | order-service             | 8081  | Order management              |
 | payment-service           | 8082  | Payment processing            |
@@ -127,6 +127,19 @@ curl -s -X POST http://localhost:8080/v1/payments \
 ```
 
 Expected response: HTTP 201 with a payment object containing `"status": "CREATED"`.
+
+### Step 4 — Ask the RAG-powered assistant for info about that payment
+
+```bash
+curl -s -X POST http://localhost:8080/v1/assistant/query \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <token>" \
+  -d '{
+        "question": "Can you provide information about my last payment?"
+      }'
+```
+
+Expected response: HTTP 200 with a natural language response with info about the payment.
 
 ---
 
