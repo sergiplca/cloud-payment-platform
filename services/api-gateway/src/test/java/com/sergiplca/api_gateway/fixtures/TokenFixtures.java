@@ -1,7 +1,7 @@
 package com.sergiplca.api_gateway.fixtures;
 
-import com.sergiplca.api_gateway.model.dto.TokenRequestDto;
-import com.sergiplca.api_gateway.model.dto.TokenResponseDto;
+import com.sergiplca.api_gateway.model.dto.token.TokenRequestDto;
+import com.sergiplca.api_gateway.model.dto.token.TokenResponseDto;
 
 import java.util.List;
 

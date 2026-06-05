@@ -39,11 +39,17 @@ spring:
                 - Path=/docs/payments,/docs/payments/**
               filters:
                 - RewritePath=/docs/payments(?<segment>/?.*), /${segment}
+
   security:
     oauth2:
       resourceserver:
         jwt:
           secret-key: ${TOKEN_SECRET}
+
+  datasource:
+    url: jdbc:${POSTGRES_URL}/cloud-payment-platform
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
 
 app:
   token:

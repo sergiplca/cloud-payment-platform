@@ -1,4 +1,4 @@
-package com.sergiplca.api_gateway.model.dto;
+package com.sergiplca.api_gateway.model.dto.token;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

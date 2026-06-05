@@ -1,7 +1,7 @@
 package com.sergiplca.api_gateway.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sergiplca.api_gateway.model.dto.TokenRequestDto;
+import com.sergiplca.api_gateway.model.dto.token.TokenRequestDto;
 import com.sergiplca.api_gateway.service.TokenService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

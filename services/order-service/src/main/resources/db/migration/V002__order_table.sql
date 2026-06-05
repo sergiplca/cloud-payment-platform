@@ -1,5 +1,3 @@
-create schema if not exists orderservice;
-
 create sequence if not exists orderservice.order_sequence start with 1 increment by 1;
 
 create table orderservice.order (

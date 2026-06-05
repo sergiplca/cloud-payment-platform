@@ -1,4 +1,4 @@
-package com.sergiplca.api_gateway.model.dto;
+package com.sergiplca.api_gateway.model.dto.token;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
@@ -15,8 +15,7 @@ public class TokenRequestDto {
     @Schema(example = "Armin van Buuren", description = "Username")
     private String username;
 
-    @NotNull(message = "roles must be present")
-    @NotEmpty(message = "At least one role must be requested")
-    @Schema(example = "[\"USER\"]", description = "Roles")
-    private List<String> roles;
+    @NotNull(message = "password must be present")
+    @Schema(example = "1234", description = "Password")
+    private String password;
 }

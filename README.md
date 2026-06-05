@@ -72,13 +72,14 @@ Once the applications are running, the full interactive API documentation is ava
 
 ### Endpoints
 
-| Method | Path                       | Service                   | Description                          |
-|--------|----------------------------|---------------------------|--------------------------------------|
-| `POST` | `/auth/token`              | api-gateway               | Obtain a bearer token                |
-| `POST` | `/v1/orders`               | order-service             | Create a new order                   |
-| `GET`  | `/v1/orders/{id}`          | order-service             | Retrieve an existing order           |
-| `POST` | `/v1/payments`             | payment-service           | Create a payment (idempotency-keyed) |
-| `POST` | `/v1/assistant/query`      | payment-assistant-service | Natural language query over payments |
+| Method | Path                  | Service                   | Description                          |
+|--------|-----------------------|---------------------------|--------------------------------------|
+| `POST` | `/v1/users/create`    | api-gateway               | Create a new application user        |
+| `POST` | `/auth/token`         | api-gateway               | Obtain a bearer token                |
+| `POST` | `/v1/orders`          | order-service             | Create a new order                   |
+| `GET`  | `/v1/orders/{id}`     | order-service             | Retrieve an existing order           |
+| `POST` | `/v1/payments`        | payment-service           | Create a payment (idempotency-keyed) |
+| `POST` | `/v1/assistant/query` | payment-assistant-service | Natural language query over payments |
 
 ---
 

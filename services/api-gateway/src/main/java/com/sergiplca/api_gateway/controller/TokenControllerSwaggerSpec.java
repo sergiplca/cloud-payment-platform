@@ -1,7 +1,7 @@
 package com.sergiplca.api_gateway.controller;
 
-import com.sergiplca.api_gateway.model.dto.TokenRequestDto;
-import com.sergiplca.api_gateway.model.dto.TokenResponseDto;
+import com.sergiplca.api_gateway.model.dto.token.TokenRequestDto;
+import com.sergiplca.api_gateway.model.dto.token.TokenResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -24,6 +24,11 @@ public interface TokenControllerSwaggerSpec {
         @ApiResponse(
             responseCode = "400",
             description = "Invalid request payload",
+            content = @Content
+        ),
+        @ApiResponse(
+            responseCode = "404",
+            description = "User not found or password invalid",
             content = @Content
         )
     })

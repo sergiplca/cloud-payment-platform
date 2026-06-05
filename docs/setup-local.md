@@ -74,29 +74,44 @@ http://localhost:8080/swagger-ui.html
 The full synchronous + asynchronous flow is:
 
 ```
-POST /auth/roken   →  api-gateway (requests access token)
-POST /v1/orders    →  order-service (creates order)
-POST /v1/payments  →  payment-service (validates order, creates payment, publishes event)
+POST /v1/users/create   →  api-gateway (creates a new user)
+POST /auth/token        →  api-gateway (requests access token for the user)
+POST /v1/orders         →  order-service (creates order)
+POST /v1/payments       →  payment-service (validates order, creates payment, publishes event)
                                 ↓
                         Kafka: payments.payment.created
                                 ↓
                     notification-service (consumes event, persists notification)
 ```
 
-### Step 1 — Obtain a token
+### Step 1 — Create a new user
 
 ```bash
-curl -s -X POST http://localhost:8080/auth/token \
+curl -s -X POST http://localhost:8080/v1/users/create \
   -H "Content-Type: application/json"
   -d '{
         "username": "dummy",
+        "password": "dummy",
         "roles": ["USER"]
       }'
 ```
 
 Copy the token from the response. All subsequent requests require it.
 
-### Step 2 — Create an order
+### Step 2 — Obtain a token
+
+```bash
+curl -s -X POST http://localhost:8080/auth/token \
+  -H "Content-Type: application/json"
+  -d '{
+        "username": "dummy",
+        "password": "dummy"
+      }'
+```
+
+Copy the token from the response. All subsequent requests require it.
+
+### Step 3 — Create an order
 
 ```bash
 curl -s -X POST http://localhost:8080/v1/orders \
@@ -111,7 +126,7 @@ curl -s -X POST http://localhost:8080/v1/orders \
 
 Copy the `id` from the response. You will need it in the next step.
 
-### Step 3 — Create a payment
+### Step 4 — Create a payment
 
 ```bash
 curl -s -X POST http://localhost:8080/v1/payments \
@@ -128,7 +143,7 @@ curl -s -X POST http://localhost:8080/v1/payments \
 
 Expected response: HTTP 201 with a payment object containing `"status": "CREATED"`.
 
-### Step 4 — Ask the RAG-powered assistant for info about that payment
+### Step 5 — Ask the RAG-powered assistant for info about that payment
 
 ```bash
 curl -s -X POST http://localhost:8080/v1/assistant/query \

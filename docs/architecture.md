@@ -39,8 +39,14 @@ The purpose is not to replicate a production payment processor in full detail, b
 The single entry point for all external traffic. Responsible for:
 
 - routing requests to internal services
+- user creation
 - enforcing token-based authorization
 - exposing the unified Swagger/OpenAPI documentation
+
+Exposes:
+
+- `POST /v1/users/create` — create a new user
+- `POST /auth/token` — generate a bearer token for the user
 
 Internal services are not accessible directly — all traffic flows through the gateway.
 

@@ -1,8 +1,8 @@
 package com.sergiplca.api_gateway.service;
 
 import com.sergiplca.api_gateway.configuration.TokenProperties;
-import com.sergiplca.api_gateway.model.dto.TokenRequestDto;
-import com.sergiplca.api_gateway.model.dto.TokenResponseDto;
+import com.sergiplca.api_gateway.model.dto.token.TokenRequestDto;
+import com.sergiplca.api_gateway.model.dto.token.TokenResponseDto;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.junit.jupiter.api.BeforeEach;
