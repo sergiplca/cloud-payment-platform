@@ -4,6 +4,16 @@ spring:
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          secret-key: ${TOKEN_SECRET}
+
+app:
+  token:
+    secret: ${TOKEN_SECRET}
+
 management:
   endpoints:
     web:

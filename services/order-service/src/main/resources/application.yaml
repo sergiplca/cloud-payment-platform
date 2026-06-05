@@ -5,6 +5,12 @@ spring:
   application:
     name: order-service
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          secret-key: super-secret-which-no-one-should-ever-know
+
   datasource:
     url: jdbc:postgresql://localhost:5432/cloud-payment-platform
     username: ${POSTGRES_USER:cloud-payment-platform}
@@ -27,6 +33,10 @@ spring:
     baseline-on-migrate: true
     validate-on-migrate: true
     default_schema: orderservice
+
+app:
+  token:
+    secret: super-secret-which-no-one-should-ever-know
 
 logging:
   pattern:

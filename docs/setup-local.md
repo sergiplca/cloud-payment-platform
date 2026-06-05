@@ -96,8 +96,6 @@ curl -s -X POST http://localhost:8080/v1/users/create \
       }'
 ```
 
-Copy the token from the response. All subsequent requests require it.
-
 ### Step 2 — Obtain a token
 
 ```bash

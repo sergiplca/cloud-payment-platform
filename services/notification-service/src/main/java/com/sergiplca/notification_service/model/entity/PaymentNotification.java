@@ -35,5 +35,7 @@ public class PaymentNotification {
 
     private Instant creationTimestamp;
 
+    private Long userId;
+
     private Long orderId;
 }

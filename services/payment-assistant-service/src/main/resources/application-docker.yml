@@ -4,6 +4,12 @@ spring:
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          secret-key: ${TOKEN_SECRET}
+
   kafka:
     bootstrap-servers: kafka:9092
 
@@ -31,6 +37,10 @@ management:
 feign:
   llm:
     url: http://ollama:11434
+
+app:
+  token:
+    secret: ${TOKEN_SECRET}
 
 info:
   app:

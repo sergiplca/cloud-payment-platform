@@ -38,6 +38,9 @@ public class Embedding {
     @Column(nullable = false, length = 100)
     private String recordId;
 
+    @Column(nullable = false)
+    private Long userId;
+
     @Column(nullable = false, columnDefinition = "text")
     private String contentText;
 

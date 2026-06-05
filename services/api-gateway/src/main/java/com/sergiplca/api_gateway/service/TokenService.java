@@ -51,7 +51,7 @@ public class TokenService {
                 .build();
         } else {
 
-            throw new NotFoundException("User with username {} was not found");
+            throw new NotFoundException("User with username " + tokenRequestDto.getUsername() + " was not found");
         }
     }
 }

@@ -40,6 +40,7 @@ public class EmbeddingService {
             Embedding.builder()
                 .recordType("payment")
                 .recordId(paymentEventDto.getPaymentId().toString())
+                .userId(paymentEventDto.getUserId())
                 .contentText(paymentEventDto.toEmbeddingText())
                 .embedding(toFloatArray(embedding.getEmbeddings().get(0)))
                 .createdAt(LocalDateTime.now())

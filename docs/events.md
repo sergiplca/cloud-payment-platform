@@ -65,9 +65,10 @@ See [ADR 002](adr/002-outbox-pattern.md) for the rationale behind the Outbox Pat
 
 #### Consumers
 
-| Service                     | Purpose                                                  |
-|-----------------------------|----------------------------------------------------------|
-| `notification-service`      | Persists a `Notification` record. Deduplicates by `eventId`. |
+| Service                     | Purpose                                                                               |
+|-----------------------------|---------------------------------------------------------------------------------------|
+| `notification-service`      | Persists a `Notification` record. Deduplicates by `eventId`.                          |
+| `payment-assistant-service` | Persists an embedding of the payment to be used by the RAG-powered assistant endpoint |
 
 #### Schema
 
@@ -81,14 +82,15 @@ See [ADR 002](adr/002-outbox-pattern.md) for the rationale behind the Outbox Pat
 
 **Payload**
 
-| Field               | Type              | Nullable | Description                                              |
-|---------------------|-------------------|----------|----------------------------------------------------------|
-| `paymentId`         | UUID              | No       | Unique identifier of the payment.                        |
-| `orderId`           | UUID              | No       | Identifier of the associated order.                      |
-| `amount`            | Decimal           | No       | Payment amount. Two decimal places. Always positive.     |
-| `currency`          | String (ISO 4217) | No    | Three-letter currency code. Example: `EUR`, `USD`.       |
+| Field               | Type              | Nullable | Description                                                    |
+|---------------------|-------------------|----------|----------------------------------------------------------------|
+| `paymentId`         | Long              | No       | Unique identifier of the payment.                              |
+| `orderId`           | Long              | No       | Identifier of the associated order.                            |
+| `amount`            | Decimal           | No       | Payment amount. Two decimal places. Always positive.           |
+| `currency`          | String (ISO 4217) | No       | Three-letter currency code. Example: `EUR`, `USD`.             |
 | `status`            | String (enum)     | No       | Initial status of the payment. Always `CREATED` in this event. |
-| `creationTimestamp` | Instant           | No       | ISO-8601 UTC timestamp at which the payment was persisted. |
+| `userId`            | Long              | No       | ID of the user who created the payment.                        |
+| `creationTimestamp` | Instant           | No       | ISO-8601 UTC timestamp at which the payment was persisted.     |
 
 **Payload enum values**
 
@@ -108,6 +110,7 @@ See [ADR 002](adr/002-outbox-pattern.md) for the rationale behind the Outbox Pat
     "currency": "EUR",
     "customerReference": "abc",
     "status": "CREATED",
+    "userId": 1234,
     "creationTimestamp": "2026-05-06T10:29:59Z"
   }
 }
@@ -115,12 +118,13 @@ See [ADR 002](adr/002-outbox-pattern.md) for the rationale behind the Outbox Pat
 
 #### Failure handling
 
-If `notification-service` cannot process this event (deserialization error, downstream failure), the message is routed to the dead-letter topic `payment.created.DLT`. The event is logged with enough context to support manual reprocessing. No automatic retry beyond the consumer's configured retry policy.
+If `notification-service` or `payment-assistant-service` cannot process this event (deserialization error, downstream failure), the message is routed to the dead-letter topic `payment.created.DLT`. The event is logged with enough context to support manual reprocessing. No automatic retry beyond the consumer's configured retry policy.
 
 ---
 
 ## Changelog
 
-| Date       | Event                      | Version | Change                          |
-|------------|----------------------------|---------|---------------------------------|
-| 2026-05-06 | `payments.payment.created` | 1.0     | Initial definition              |
+| Date       | Event                      | Version | Change                                  |
+|------------|----------------------------|---------|-----------------------------------------|
+| 2026-05-06 | `payments.payment.created` | 1.0     | Initial definition                      |
+| 2026-06-05 | `payments.payment.created` | 1.1     | Addition of userId field to the payload |

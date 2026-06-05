@@ -14,6 +14,7 @@ public class PaymentEventDto {
     private String currency;
     private String customerReference;
     private PaymentStatus status;
+    private Long userId;
     private Long orderId;
     private Instant creationTimestamp;
 

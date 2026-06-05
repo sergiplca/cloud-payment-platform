@@ -15,6 +15,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,7 +46,11 @@ public class PaymentService {
             throw new NotFoundException("Order with id " + requestDto.getOrderId() + " was not found");
         }
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Jwt jwt = (Jwt) authentication.getPrincipal();
+
         var payment = paymentMapper.toEntity(requestDto);
+        payment.setUserId(jwt.getClaim("userId"));
         payment.setStatus(PaymentStatus.CREATED);
 
         var savedPayment = paymentRepository.save(payment);

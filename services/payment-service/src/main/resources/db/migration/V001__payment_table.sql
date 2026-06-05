@@ -8,6 +8,7 @@ create table paymentservice.payment (
     currency varchar(3) not null,
     customer_reference varchar not null,
     status varchar not null,
+    user_id int8 not null,
     creation_timestamp timestamp not null,
     primary key (id)
 );

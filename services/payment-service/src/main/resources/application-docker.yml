@@ -4,6 +4,12 @@ spring:
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          secret-key: ${TOKEN_SECRET}
+
   kafka:
     bootstrap-servers: kafka:9092
 
@@ -36,6 +42,9 @@ app:
     fixed-delay: 2000
     page-size: 512
     default-sort-column: creationTimestamp
+
+  token:
+    secret: ${TOKEN_SECRET}
 
 info:
   app:

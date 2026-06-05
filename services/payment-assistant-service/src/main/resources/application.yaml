@@ -5,6 +5,12 @@ spring:
   application:
     name: payment-assistant-service
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          secret-key: super-secret-which-no-one-should-ever-know
+
   datasource:
     url: jdbc:postgresql://localhost:5432/cloud-payment-platform
     username: ${POSTGRES_USER:cloud-payment-platform}
@@ -52,6 +58,9 @@ feign:
 app:
   kafka:
     payment-topic: payments.payment.completed
+
+  token:
+    secret: super-secret-which-no-one-should-ever-know
 
 logging:
   pattern:

@@ -4,6 +4,7 @@ create table paymentassistantservice.embedding (
     id int8 not null default nextval('paymentassistantservice.embedding_sequence'),
     record_type varchar(50) not null,
     record_id varchar(100) not null,
+    user_id int8 not null,
     content_text text not null,
     embedding vector(768) not null,
     created_at timestamp not null default now(),

@@ -13,6 +13,7 @@ public interface PaymentMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "status", ignore = true)
+    @Mapping(target = "userId", ignore = true)
     @Mapping(target = "creationTimestamp", expression = "java(java.time.Instant.now())")
     Payment toEntity(PaymentRequestDto request);
 

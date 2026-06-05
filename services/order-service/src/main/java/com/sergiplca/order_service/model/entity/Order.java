@@ -27,6 +27,8 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
+    private Long userId;
+
     @CreationTimestamp
     private LocalDateTime creationTimestamp;
 }

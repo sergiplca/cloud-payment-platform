@@ -10,6 +10,7 @@ create table notificationservice.payment_notification (
     customer_reference varchar not null,
     status varchar not null,
     creation_timestamp timestamp not null,
+    user_id int8 not null,
     order_id int8 not null,
     primary key (id)
 );

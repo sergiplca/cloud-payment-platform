@@ -5,6 +5,12 @@ spring:
   application:
     name: payment-service
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          secret-key: super-secret-which-no-one-should-ever-know
+
   datasource:
     url: jdbc:postgresql://localhost:5432/cloud-payment-platform
     username: ${POSTGRES_USER:cloud-payment-platform}
@@ -44,6 +50,9 @@ app:
     fixed-delay: 2000
     page-size: 512
     default-sort-column: creationTimestamp
+
+  token:
+    secret: super-secret-which-no-one-should-ever-know
 
 logging:
   pattern:
